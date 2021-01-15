@@ -1,0 +1,11 @@
+{
+  "name": "cookbook",
+  "version": "1.0.0",
+  "description": "Saving old recipies for the next generation.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gina Jonas",
+  "license": "ISC"
+}

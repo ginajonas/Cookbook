@@ -1,16 +1,19 @@
-import ProfileCard from './ProfileCard'
-import NavBar from './NavBar'
-import Accordion from './Accordion'
-import RecipeForm from './RecipeForm'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import RecipePost from './RecipePost'
+
+import ProfileCard from '../components/ProfileCard'
+import NavBar from '../components/NavBar'
+import Accordion from '../components/Accordion'
+import RecipeForm from '../components/RecipeForm'
+import RecipePost from '../components/RecipePost'
 
 export default function HomePage() {
   const [recipes, setRecipes] = useState([])
 
   useEffect(() => {
-    getRecipes()
+    if (recipes.length === 0) {
+      getRecipes()
+    }
   })
 
   const getRecipes = () => {

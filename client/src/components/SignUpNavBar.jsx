@@ -6,7 +6,6 @@ export default function SignUpNavBar() {
           <a
             className="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
             href="/"
-            onclick="openNav()"
           >
             <i className="fa fa-bars"></i>
           </a>

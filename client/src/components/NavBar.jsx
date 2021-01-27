@@ -1,4 +1,14 @@
+import axios from 'axios'
+
 export default function NavBar() {
+  // We assign a onclick to the logout button to run the logOut function when it is clicked. The logout function will run an api call to /api/logout to destroy the session.
+  const logOut = (e) => {
+    e.preventDefault()
+    axios.get('/api/logout').then((response) => {
+      // redirect to the login page once logout is successful
+      window.location.href = '#/login'
+    })
+  }
   return (
     <>
       <div className="w3-top">
@@ -6,7 +16,7 @@ export default function NavBar() {
           <a
             className="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
             href="/"
-            onclick="openNav()"
+            onClick="openNav()"
           >
             <i className="fa fa-bars"></i>
           </a>
@@ -37,36 +47,13 @@ export default function NavBar() {
           >
             <i className="fa fa-envelope"></i>
           </a>
-          <div className="w3-dropdown-hover w3-hide-small">
-            <button
-              className="w3-button w3-padding-large"
-              title="Notifications"
-            >
-              <i className="fa fa-bell"></i>
-              <span className="w3-badge w3-right w3-small w3-green">3</span>
-            </button>
-            <div className="w3-dropdown-content w3-card-4 w3-bar-block bar-block">
-              <a href="/" className="w3-bar-item w3-button">
-                One new friend request
-              </a>
-              <a href="/" className="w3-bar-item w3-button">
-                John Doe posted on your wall
-              </a>
-              <a href="/" className="w3-bar-item w3-button">
-                Jane likes your post
-              </a>
-            </div>
-          </div>
           <a
             href="/"
+            onClick={logOut}
             className="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white"
             title="My Account"
           >
-            <img
-              src="/w3images/avatar2.png"
-              className="w3-circle circle"
-              alt="Avatar"
-            />
+            Log Out
           </a>
         </div>
       </div>

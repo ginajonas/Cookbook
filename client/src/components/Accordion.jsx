@@ -3,7 +3,7 @@ export default function Accordion() {
     <div className="w3-card w3-round">
       <div className="w3-white">
         <button
-          onclick="myFunction('Demo1')"
+          onClick="myFunction('Demo1')"
           className="w3-button w3-block w3-theme-l1 w3-left-align"
         >
           <i className="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My
@@ -13,7 +13,7 @@ export default function Accordion() {
           <p>Some text..</p>
         </div>
         <button
-          onclick="myFunction('Demo2')"
+          onClick="myFunction('Demo2')"
           className="w3-button w3-block w3-theme-l1 w3-left-align"
         >
           <i className="fa fa-calendar-check-o fa-fw w3-margin-right"></i> My
@@ -23,7 +23,7 @@ export default function Accordion() {
           <p>Some other text..</p>
         </div>
         <button
-          onclick="myFunction('Demo3')"
+          onClick="myFunction('Demo3')"
           className="w3-button w3-block w3-theme-l1 w3-left-align"
         >
           <i className="fa fa-users fa-fw w3-margin-right"></i> My Photos

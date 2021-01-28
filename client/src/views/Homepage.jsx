@@ -8,10 +8,10 @@ import RecipeForm from '../components/RecipeForm'
 import RecipePost from '../components/RecipePost'
 
 export default function HomePage() {
-  const [recipes, setRecipes] = useState([])
+  const [recipes, setRecipes] = useState(null)
 
   useEffect(() => {
-    if (recipes.length === 0) {
+    if (recipes === null) {
       getRecipes()
     }
   })
@@ -33,9 +33,7 @@ export default function HomePage() {
           </div>
           <div className="w3-col m7">
             <RecipeForm getRecipes={getRecipes} />
-            {recipes.map((recipe) => (
-              <RecipePost {...recipe} />
-            ))}
+            {recipes && recipes.map((recipe) => <RecipePost {...recipe} />)}
           </div>
         </div>
       </div>

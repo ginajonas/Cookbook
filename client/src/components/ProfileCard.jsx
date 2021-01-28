@@ -1,8 +1,12 @@
+import UserContext from '../utils/UserContext'
+import { useContext } from 'react'
 function ProfileCard() {
+  const { firstName, lastName } = useContext(UserContext)
+
   return (
     <div className="w3-card w3-round w3-white">
       <div className="w3-container">
-        <h4 className="w3-center">My Profile</h4>
+        <h4 className="w3-center"> Chef {firstName + ' ' + lastName}</h4>
         <p className="w3-center">
           <img
             src="/w3images/avatar3.png"

@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import Login from './views/Login'
 import HomePage from './views/Homepage'
+import UserContext from './utils/UserContext'
+
 function App() {
   const [user, setUser] = useState({})
   const [sessionExists, setSessionExists] = useState(null)
@@ -26,18 +28,24 @@ function App() {
       })
   }
 
-  return (
-    <Router>
-      <Switch>
-        <Route exact path="/login">
-          <Login />
-        </Route>
-        <Route exact path={'/'}>
-          {sessionExists !== false ? <HomePage /> : <Login />}
-        </Route>
-      </Switch>
-    </Router>
-  )
+  if (sessionExists === null) {
+    return <></>
+  } else {
+    return (
+      <UserContext.Provider value={user}>
+        <Router>
+          <Switch>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path={'/'}>
+              {sessionExists === false ? <Login /> : <HomePage />}
+            </Route>
+          </Switch>
+        </Router>
+      </UserContext.Provider>
+    )
+  }
 }
 
 export default App

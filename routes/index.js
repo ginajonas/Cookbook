@@ -3,7 +3,7 @@ const Recipe = require('../models/recipe')
 const User = require('../models/user')
 
 router.post('/api/recipe', (req, res) => {
-  Recipe.create(req.body)
+  Recipe.create({ recipe: req.body.recipe, user: req.session.user._id })
     .then((dbRecipe) => {
       res.json(dbRecipe)
     })
@@ -14,6 +14,7 @@ router.post('/api/recipe', (req, res) => {
 
 router.get('/api/recipe', (req, res) => {
   Recipe.find({})
+    .populate('user')
     .then((dbRecipe) => {
       res.json(dbRecipe)
     })
@@ -24,7 +25,12 @@ router.get('/api/recipe', (req, res) => {
 router.post('/api/signup', (req, res) => {
   User.create(req.body)
     .then((user) => {
-      req.session.user = user
+      req.session.user = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        _id: user._id,
+      }
       res.json(user)
     })
     .catch((err) => {
@@ -73,6 +79,19 @@ router.get('/api/user', (req, res) => {
   } else {
     res.status(404).json({})
   }
+})
+
+router.post('/api/likeRecipe', (req, res) => {
+  const likedRecipeId = req.body.recipe
+  const userId = req.session.user._id
+  User.updateOne({ _id: userId }, { $push: { likedRecipes: likedRecipeId } })
+    .populate('likedRecipes')
+    .then((db) => {
+      res.json(db)
+    })
+    .catch((err) => {
+      res.status(400)
+    })
 })
 
 module.exports = router

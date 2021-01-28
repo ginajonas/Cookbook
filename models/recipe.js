@@ -7,6 +7,12 @@ const recipeSchema = new Schema({
     type: String,
     required: true,
   },
+  // add extra fields
+  user: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User',
+  },
 })
 
 const Recipes = mongoose.model('Recipes', recipeSchema)

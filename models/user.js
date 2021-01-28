@@ -21,6 +21,12 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  likedRecipes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Recipe',
+    },
+  ],
 })
 
 userSchema.pre('save', function (next) {

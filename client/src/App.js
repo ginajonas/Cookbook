@@ -5,6 +5,7 @@ import './App.css'
 import Login from './views/Login'
 import HomePage from './views/Homepage'
 import UserContext from './utils/UserContext'
+import LikedRecipe from './views/LikedRecipe'
 
 function App() {
   const [user, setUser] = useState({})
@@ -40,6 +41,9 @@ function App() {
             </Route>
             <Route exact path={'/'}>
               {sessionExists === false ? <Login /> : <HomePage />}
+            </Route>
+            <Route exact path={'/liked-recipes'}>
+              {sessionExists === false ? <Login /> : <LikedRecipe />}
             </Route>
           </Switch>
         </Router>

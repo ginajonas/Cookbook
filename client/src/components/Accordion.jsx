@@ -1,14 +1,15 @@
+import { Link } from 'react-router-dom'
+
 export default function Accordion() {
   return (
     <div className="w3-card w3-round">
       <div className="w3-white">
-        <button
-          onClick="myFunction('Demo1')"
-          className="w3-button w3-block w3-theme-l1 w3-left-align"
-        >
-          <i className="fa fa-circle-o-notch fa-fw w3-margin-right"></i> My
-          Groups
-        </button>
+        <Link to="/liked-recipes">
+          <button className="w3-button w3-block w3-theme-l1 w3-left-align">
+            <i className="fa fa-spoon fa-fw w3-margin-right"></i> My Liked
+            Recipes
+          </button>
+        </Link>
         <div id="Demo1" className="w3-hide w3-container">
           <p>Some text..</p>
         </div>

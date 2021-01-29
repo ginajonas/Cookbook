@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.title {
+  
+  text-align: center;
+  color: rgb(26, 78, 122);
+}
+
+.daily-recipe-img{
+  width:100%;
+}

@@ -18,34 +18,34 @@ export default function NavBar() {
             href="/"
             onClick="openNav()"
           >
-            <i className="fa fa-bars"></i>
+            <i className="fa fa-cutlery"></i>
           </a>
           <a
             href="/"
             className="w3-bar-item w3-button w3-padding-large w3-theme-d4"
           >
-            <i className="fa fa-home w3-margin-right"></i>Logo
+            <i className="fa fa-home w3-margin-right"></i>Cookbook
           </a>
           <a
             href="/"
             className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
             title="News"
           >
-            <i className="fa fa-globe"></i>
+            <i className="fa fa-fa fa-cutlery"></i>
           </a>
           <a
             href="/"
             className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
             title="Account Settings"
           >
-            <i className="fa fa-user"></i>
+            <i className="fa fa-spoon"></i>
           </a>
           <a
             href="/"
             className="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-            title="Messages"
+            title=""
           >
-            <i className="fa fa-envelope"></i>
+            <i className="fa fa-book"></i>
           </a>
           <a
             href="/"

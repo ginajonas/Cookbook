@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Recipe = require('../models/recipe')
 const User = require('../models/user')
+const axios = require('axios')
 
 router.post('/api/recipe', (req, res) => {
   Recipe.create({ recipe: req.body.recipe, user: req.session.user._id })
@@ -88,6 +89,35 @@ router.post('/api/likeRecipe', (req, res) => {
     .populate('likedRecipes')
     .then((db) => {
       res.json(db)
+    })
+    .catch((err) => {
+      res.status(400)
+    })
+})
+
+router.get('/api/likeRecipe', (req, res) => {
+  const userId = req.session.user._id
+  User.findOne({ _id: userId })
+    .populate({
+      path: 'likedRecipes',
+      populate: { path: 'user', model: 'User' },
+    })
+    .then((user) => {
+      console.log(user.likedRecipes)
+      res.json(user.likedRecipes)
+    })
+    .catch((err) => {
+      res.status(400)
+    })
+})
+
+router.get('/api/daily-recipe', (req, res) => {
+  axios
+    .get(
+      'https://api.spoonacular.com/recipes/random?apiKey=fca9157baf184d688658c0aa5f74b4bd'
+    )
+    .then((response) => {
+      res.json(response.data.recipes[0])
     })
     .catch((err) => {
       res.status(400)

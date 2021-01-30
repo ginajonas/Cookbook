@@ -85,7 +85,10 @@ router.get('/api/user', (req, res) => {
 router.post('/api/likeRecipe', (req, res) => {
   const likedRecipeId = req.body.recipe
   const userId = req.session.user._id
-  User.updateOne({ _id: userId }, { $push: { likedRecipes: likedRecipeId } })
+  User.updateOne(
+    { _id: userId },
+    { $addToSet: { likedRecipes: likedRecipeId } }
+  )
     .populate('likedRecipes')
     .then((db) => {
       res.json(db)

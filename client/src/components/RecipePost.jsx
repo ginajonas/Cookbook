@@ -8,11 +8,7 @@ export default function RecipePost({ recipe, user, _id }) {
   return (
     <div className="w3-container w3-card w3-white w3-round w3-margin post">
       <br />
-      <img
-        src="/w3images/avatar5.png"
-        alt="Avatar"
-        className="w3-left w3-circle w3-margin-right"
-      />
+
       <span className="w3-right w3-opacity">16 min</span>
       <h4>
         Chef {user.firstName} {user.lastName}

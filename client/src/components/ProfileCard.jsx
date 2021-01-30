@@ -7,13 +7,7 @@ function ProfileCard() {
     <div className="w3-card w3-round w3-white">
       <div className="w3-container">
         <h4 className="w3-center"> Chef {firstName + ' ' + lastName}</h4>
-        <p className="w3-center">
-          <img
-            src="/w3images/avatar3.png"
-            className="w3-circle profile-img"
-            alt="Avatar"
-          />
-        </p>
+        <p className="w3-center"></p>
         <hr />
         <p>
           <i className="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>{' '}

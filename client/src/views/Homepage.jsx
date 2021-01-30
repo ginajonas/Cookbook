@@ -14,8 +14,9 @@ export default function HomePage() {
   useEffect(() => {
     if (recipes === null) {
       getRecipes()
+      console.log('recipe run')
     }
-  })
+  }, [recipes])
 
   const getRecipes = () => {
     axios.get('/api/recipe').then((response) => {
@@ -23,6 +24,9 @@ export default function HomePage() {
     })
   }
 
+  if (recipes === null) {
+    return <></>
+  }
   return (
     <>
       <NavBar />
@@ -33,8 +37,11 @@ export default function HomePage() {
             <Accordion />
           </div>
           <div className="w3-col m7">
-            <RecipeForm getRecipes={getRecipes} />
-            {recipes && recipes.map((recipe) => <RecipePost {...recipe} />)}
+            <RecipeForm />
+            {recipes &&
+              recipes.map((recipe) => (
+                <RecipePost key={recipe._id} {...recipe} />
+              ))}
           </div>
           <div className="w3-col m2">
             <DailyRecipe />

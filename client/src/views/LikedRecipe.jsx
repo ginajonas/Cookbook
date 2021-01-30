@@ -33,7 +33,9 @@ export default function LikeRecipe() {
           </div>
           <div className="w3-col m7">
             {recipes &&
-              recipes.map((likerecipe) => <RecipePost {...likerecipe} />)}
+              recipes.map((likerecipe) => (
+                <RecipePost key={likerecipe._id} {...likerecipe} />
+              ))}
           </div>
         </div>
       </div>

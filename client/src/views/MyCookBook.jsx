@@ -15,7 +15,7 @@ export default function MyCookBook() {
     if (recipes === null) {
       getRecipes()
     }
-  }, [])
+  }, [recipes])
 
   const getRecipes = () => {
     axios.get('/api/my-recipe').then((response) => {

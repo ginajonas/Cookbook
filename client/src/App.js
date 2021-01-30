@@ -15,14 +15,14 @@ function App() {
     if (sessionExists === null) {
       getUser()
     }
-  })
+  }, [sessionExists])
 
   const getUser = () => {
     axios
       .get('/api/user')
       .then((response) => {
-        setUser(response.data)
         setSessionExists(true)
+        setUser(response.data)
       })
       .catch((err) => {
         setSessionExists(false)

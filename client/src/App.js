@@ -6,6 +6,7 @@ import Login from './views/Login'
 import HomePage from './views/Homepage'
 import UserContext from './utils/UserContext'
 import LikedRecipe from './views/LikedRecipe'
+import MyCookBook from './views/MyCookBook'
 
 function App() {
   const [user, setUser] = useState({})
@@ -44,6 +45,9 @@ function App() {
             </Route>
             <Route exact path={'/liked-recipes'}>
               {sessionExists === false ? <Login /> : <LikedRecipe />}
+            </Route>
+            <Route exact path={'/my-cook-book'}>
+              {sessionExists === false ? <Login /> : <MyCookBook />}
             </Route>
           </Switch>
         </Router>

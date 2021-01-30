@@ -5,11 +5,15 @@ import ProfileCard from '../components/ProfileCard'
 import NavBar from '../components/NavBar'
 import Accordion from '../components/Accordion'
 
-import RecipePost from '../components/RecipePost'
-
+import LikeRecipePost from '../components/LikeRecipePost'
+import ModifyLikedRecipeForm from '../components/ModifyLikedRecipeForm'
 export default function LikeRecipe() {
   const [recipes, setRecipes] = useState(null)
-
+  const [recipeToBeModified, setRecipeToBeModified] = useState({
+    title: '',
+    instructions: '',
+    ingredients: '',
+  })
   useEffect(() => {
     if (recipes === null) {
       getLikedRecipes()
@@ -32,10 +36,20 @@ export default function LikeRecipe() {
             <Accordion />
           </div>
           <div className="w3-col m7">
+            <ModifyLikedRecipeForm
+              getRecipes={getLikedRecipes}
+              {...recipeToBeModified}
+            />
             {recipes &&
-              recipes.map((likerecipe) => (
-                <RecipePost key={likerecipe._id} {...likerecipe} />
-              ))}
+              recipes
+                .reverse()
+                .map((likerecipe) => (
+                  <LikeRecipePost
+                    modifyRecipe={setRecipeToBeModified}
+                    key={likerecipe._id}
+                    {...likerecipe}
+                  />
+                ))}
           </div>
         </div>
       </div>

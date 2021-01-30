@@ -37,7 +37,7 @@ export default function HomePage() {
             <Accordion />
           </div>
           <div className="w3-col m7">
-            <RecipeForm />
+            <RecipeForm getRecipes={getRecipes} />
             {recipes &&
               recipes.map((recipe) => (
                 <RecipePost key={recipe._id} {...recipe} />

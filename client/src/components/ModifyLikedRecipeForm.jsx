@@ -1,17 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
+export default function ModifyLikedRecipeForm({
+  title,
+  instructions,
+  ingredients,
+  getRecipes,
+}) {
+  const [titleField, setTitle] = useState('')
+  const [ingredientsField, setIngredients] = useState('')
+  const [instructionsField, setInstructions] = useState('')
 
-export default function RecipeForm({ getRecipes }) {
-  const [title, setTitle] = useState('')
-  const [ingredients, setIngredients] = useState('')
-  const [instructions, setInstructions] = useState('')
+  useEffect(() => {
+    setTitle(title)
+    setIngredients(ingredients)
+    setInstructions(instructions)
+  }, [title, instructions, ingredients])
 
   const postRecipe = () => {
     axios
       .post('/api/recipe', {
-        title: title,
-        ingredients: ingredients,
-        instructions: instructions,
+        title: titleField,
+        ingredients: ingredientsField,
+        instructions: instructionsField,
       })
       .then((response) => {
         getRecipes()
@@ -24,7 +34,7 @@ export default function RecipeForm({ getRecipes }) {
         <div className="w3-card w3-round w3-white">
           <div className="w3-container w3-padding">
             <input
-              value={title}
+              value={titleField}
               onChange={(e) => setTitle(e.target.value)}
               style={{ width: '100%' }}
               type="text"
@@ -32,7 +42,7 @@ export default function RecipeForm({ getRecipes }) {
               className="w3-border w3-padding"
             />
             <textarea
-              value={ingredients}
+              value={ingredientsField}
               onChange={(e) => setIngredients(e.target.value)}
               rows={'5'}
               style={{ width: '100%' }}
@@ -41,7 +51,7 @@ export default function RecipeForm({ getRecipes }) {
               className="w3-border w3-padding"
             />
             <textarea
-              value={instructions}
+              value={instructionsField}
               onChange={(e) => setInstructions(e.target.value)}
               rows={'5'}
               style={{ width: '100%' }}
@@ -54,7 +64,7 @@ export default function RecipeForm({ getRecipes }) {
               type="button"
               className="w3-button w3-theme"
             >
-              <i className="fa fa-pencil"></i> &nbsp;Post
+              <i className="fa fa-pencil"></i> &nbsp;Modify
             </button>
           </div>
         </div>

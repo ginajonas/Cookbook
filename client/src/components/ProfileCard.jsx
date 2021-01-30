@@ -1,7 +1,9 @@
 import UserContext from '../utils/UserContext'
 import { useContext } from 'react'
 function ProfileCard() {
-  const { firstName, lastName } = useContext(UserContext)
+  const { firstName, lastName, likeCount, recipeCount } = useContext(
+    UserContext
+  )
 
   return (
     <div className="w3-card w3-round w3-white">
@@ -10,16 +12,12 @@ function ProfileCard() {
         <p className="w3-center"></p>
         <hr />
         <p>
-          <i className="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>{' '}
-          Designer, UI
+          <i className="fa fa-heart fa-fw w3-margin-right w3-text-theme"></i>{' '}
+          Liked Recipes: {likeCount}
         </p>
         <p>
-          <i className="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>{' '}
-          London, UK
-        </p>
-        <p>
-          <i className="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>{' '}
-          April 1, 1988
+          <i className="fa fa-book fa-fw w3-margin-right w3-text-theme"></i>{' '}
+          Posted Recipes: {recipeCount}
         </p>
       </div>
     </div>

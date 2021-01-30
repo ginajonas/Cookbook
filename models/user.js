@@ -24,7 +24,7 @@ const userSchema = new Schema({
   likedRecipes: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Recipes',
+      ref: 'Recipe',
     },
   ],
 })

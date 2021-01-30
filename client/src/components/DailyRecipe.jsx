@@ -8,8 +8,8 @@ function DailyRecipe() {
     axios
       .get('/api/daily-recipe')
       .then((response) => {
-        setRecipe(response.data)
         setApiDone(true)
+        setRecipe(response.data)
       })
       .catch((err) => {
         setApiDone(true)
@@ -20,7 +20,7 @@ function DailyRecipe() {
     if (apiDone === false) {
       getDailyRecipe()
     }
-  })
+  }, [apiDone])
 
   if (recipe === false) {
     return <></>

@@ -25,6 +25,9 @@ export default function ModifyLikedRecipeForm({
       })
       .then((response) => {
         getRecipes()
+        setTitle('')
+        setIngredients('')
+        setInstructions('')
       })
   }
 

@@ -15,6 +15,9 @@ export default function RecipeForm({ getRecipes }) {
       })
       .then((response) => {
         getRecipes()
+        setTitle('')
+        setIngredients('')
+        setInstructions('')
       })
   }
 

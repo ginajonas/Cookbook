@@ -16,7 +16,6 @@ export default function NavBar() {
           <a
             className="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
             href="/"
-            onClick="openNav()"
           >
             <i className="fa fa-cutlery"></i>
           </a>

@@ -26,22 +26,24 @@ function DailyRecipe() {
     return <></>
   }
   return (
-    <div className="w3-container">
-      <p>Featured Recipe:</p>
-      <img src={recipe.image} className="daily-recipe-img" alt="Forest" />
-      <p>
-        <strong>{recipe.title}</strong>
-      </p>
-      <p>
-        <a
-          href={recipe.sourceUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="w3-button w3-block w3-theme-l4"
-        >
-          Info
-        </a>
-      </p>
+    <div className="w3-card w3-round w3-white">
+      <div className="w3-container">
+        <p>Featured Recipe:</p>
+        <img src={recipe.image} className="daily-recipe-img" alt="Forest" />
+        <p>
+          <strong>{recipe.title}</strong>
+        </p>
+        <p>
+          <a
+            href={recipe.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="w3-button w3-block w3-theme-l4"
+          >
+            Info
+          </a>
+        </p>
+      </div>
     </div>
   )
 }

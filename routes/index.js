@@ -4,7 +4,7 @@ const User = require('../models/user')
 const axios = require('axios')
 
 router.post('/api/recipe', (req, res) => {
-  Recipe.create({ recipe: req.body.recipe, user: req.session.user._id })
+  Recipe.create({ ...req.body, user: req.session.user._id })
     .then((dbRecipe) => {
       res.json(dbRecipe)
     })
@@ -15,6 +15,7 @@ router.post('/api/recipe', (req, res) => {
 
 router.get('/api/recipe', (req, res) => {
   Recipe.find({})
+    .sort({ createdAt: 'desc' })
     .populate('user')
     .then((dbRecipe) => {
       res.json(dbRecipe)
@@ -75,8 +76,15 @@ router.get('/api/logout', (req, res) => {
 })
 
 router.get('/api/user', (req, res) => {
+  const user = req.session.user
   if (req.session.user) {
-    res.json(req.session.user)
+    Recipe.find({ user: user._id }).count((err, count) => {
+      req.session.user['recipeCount'] = count
+      User.findOne({ _id: user._id }).then((user) => {
+        req.session.user['likeCount'] = user.likedRecipes.length
+        res.json(req.session.user)
+      })
+    })
   } else {
     res.status(404).json({})
   }
@@ -106,8 +114,7 @@ router.get('/api/likeRecipe', (req, res) => {
       populate: { path: 'user', model: 'User' },
     })
     .then((user) => {
-      console.log(user.likedRecipes)
-      res.json(user.likedRecipes)
+      res.json(user.likedRecipes.reverse())
     })
     .catch((err) => {
       res.status(400)
@@ -124,6 +131,19 @@ router.get('/api/daily-recipe', (req, res) => {
     })
     .catch((err) => {
       res.status(400)
+    })
+})
+
+router.get('/api/my-recipe', (req, res) => {
+  const userId = req.session.user._id
+  Recipe.find({ user: userId })
+    .sort({ createdAt: 'desc' })
+    .populate('user')
+    .then((dbRecipe) => {
+      res.json(dbRecipe)
+    })
+    .catch((err) => {
+      res.status(400).json(err)
     })
 })
 

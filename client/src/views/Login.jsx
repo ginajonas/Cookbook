@@ -14,18 +14,18 @@ function Login() {
               So many things are learned from previous generations and yet so
               many are lost to history. When it comes to all the good and
               nutritious foods from our parents, grandparents and family members
-              that we have grown accustom to should not be lost to history. This
-              app will allow you to keep those precious recipes intact and learn
-              new ones from others as you built your perfect recipe book.
+              that we have grown accustomed to should not be lost to history.
+              This app will allow you to keep those precious recipes intact and
+              learn new ones from others as you built your perfect recipe book.
             </h4>
           </div>
         </div>
         <div className="w3-row">
           <div className="w3-col m6">
-            <SignUpForm />
+            <LoginForm />
           </div>
           <div className="w3-col m6">
-            <LoginForm />
+            <SignUpForm />
           </div>
         </div>
       </div>

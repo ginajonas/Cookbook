@@ -24,6 +24,18 @@ router.get('/api/recipe', (req, res) => {
       res.status(400).json(err)
     })
 })
+
+router.delete('/api/recipe/:id', (req, res) => {
+  const id = req.params.id
+  Recipe.deleteOne({ _id: id, user: req.session.user._id })
+    .then((db) => {
+      res.json(db)
+    })
+    .catch((err) => {
+      res.status(400)
+    })
+})
+
 router.post('/api/signup', (req, res) => {
   User.create(req.body)
     .then((user) => {

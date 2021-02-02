@@ -39,7 +39,11 @@ export default function HomePage() {
             <RecipeForm getRecipes={getRecipes} />
             {recipes &&
               recipes.map((recipe) => (
-                <RecipePost key={recipe._id} {...recipe} />
+                <RecipePost
+                  getRecipes={getRecipes}
+                  key={recipe._id}
+                  {...recipe}
+                />
               ))}
           </div>
           <div className="w3-col m2">

@@ -40,7 +40,13 @@ export default function MyCookBook() {
             {recipes &&
               recipes
                 .reverse()
-                .map((recipe) => <RecipePost key={recipe._id} {...recipe} />)}
+                .map((recipe) => (
+                  <RecipePost
+                    getRecipes={getRecipes}
+                    key={recipe._id}
+                    {...recipe}
+                  />
+                ))}
           </div>
           <div className="w3-col m2">
             <DailyRecipe />

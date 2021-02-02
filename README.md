@@ -4,6 +4,10 @@
 
 So many things are learned from previous generations and yet so many are lost to history. When it comes to all the good and nutritious foods from our parents, grandparents and family members that we have grown accustom to should not be lost to history. This app will allow you to keep those precious recipes intact and learn new ones from others as you built your perfect recipe book.
 
+## App Link
+
+[https://app-cookbook-gina.herokuapp.com/](https://app-cookbook-gina.herokuapp.com/#/)
+
 ## Basic Features
 
 * Users can create personal accounts by signing up.
@@ -15,7 +19,9 @@ So many things are learned from previous generations and yet so many are lost to
 
 ## Future Features
 
-* TBD
+* Adding a location input so that a weather API can be integrated into the app so that spoonacular API can suggest a recipe based on weather conditions. Example: sunny day in Ottawa, suggest BBQ as dinner.
+* Adding search functionality within your cookbook list
+* Adding ability to upload picture\short videos of recipes
 
 ## Required Technologies and Packages
 

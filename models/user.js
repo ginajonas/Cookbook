@@ -29,6 +29,7 @@ const userSchema = new Schema({
   ],
 })
 
+// .pre('save') runs before a user is inserted to the DB
 userSchema.pre('save', function (next) {
   var user = this
   user.email = user.email.toLowerCase()
@@ -49,6 +50,7 @@ userSchema.pre('save', function (next) {
   })
 })
 
+// We created a custom function called comparePassword that uses bcrypt (the thing that we used to hash the password) to check if the password is equal to the stored user password hash
 userSchema.methods.comparePassword = function (candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
     if (err) return cb(err)

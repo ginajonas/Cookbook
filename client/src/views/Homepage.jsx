@@ -14,7 +14,6 @@ export default function HomePage() {
   useEffect(() => {
     if (recipes === null) {
       getRecipes()
-      console.log('recipe run')
     }
   }, [recipes])
 

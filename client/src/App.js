@@ -30,6 +30,7 @@ function App() {
       })
   }
 
+  // Api call is not done yet
   if (sessionExists === null) {
     return <></>
   } else {
@@ -40,6 +41,7 @@ function App() {
             <Route exact path="/login">
               <Login />
             </Route>
+            {/* these pages are restricted to logged in users, if no user is logged in, return to login page */}
             <Route exact path={'/'}>
               {sessionExists === false ? <Login /> : <HomePage />}
             </Route>

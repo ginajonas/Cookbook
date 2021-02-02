@@ -22,6 +22,7 @@ export default function SignUpForm() {
         password: password,
       })
       .then((response) => {
+        // redirect to the home page
         window.location = '/'
       })
       .catch((error) => {

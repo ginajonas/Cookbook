@@ -13,8 +13,6 @@ export default function RecipePost({
   }
   return (
     <div className="w3-container w3-card w3-white w3-round w3-margin post">
-      <br />
-
       <h4>
         Chef {user.firstName} {user.lastName}
       </h4>

@@ -14,6 +14,7 @@ export default function RecipeForm({ getRecipes }) {
         instructions: instructions,
       })
       .then((response) => {
+        // after creating recipe, getrecipes again and empty recipe form fields
         getRecipes()
         setTitle('')
         setIngredients('')

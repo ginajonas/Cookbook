@@ -36,6 +36,7 @@ router.post('/api/signup', (req, res) => {
       res.json(user)
     })
     .catch((err) => {
+      // This means the user email is a duplicate
       if (err.code === 11000) {
         res.status(400).json({ message: 'Email is already in use' })
       } else {
@@ -46,11 +47,14 @@ router.post('/api/signup', (req, res) => {
 router.post('/api/login', (req, res) => {
   User.findOne({ email: req.body.email.toLowerCase() }, function (err, user) {
     if (err) throw err
+    // If the user exists, if user is null, that means the database came back with nothing, so user doesnt exist.
     if (user !== null) {
       user.comparePassword(req.body.password, function (err, isMatch) {
-        if (!isMatch) {
+        // password is incorrect
+        if (isMatch === false) {
           res.status(400).json({ message: 'Password or user incorrect' })
         } else {
+          // password does match
           req.session.user = {
             firstName: user.firstName,
             lastName: user.lastName,
@@ -77,9 +81,12 @@ router.get('/api/logout', (req, res) => {
 
 router.get('/api/user', (req, res) => {
   const user = req.session.user
+  // if session exists ie. user logged in.
   if (req.session.user) {
+    // Find how many recipes the user posted
     Recipe.find({ user: user._id }).count((err, count) => {
       req.session.user['recipeCount'] = count
+      // Find how many recipes the user liked
       User.findOne({ _id: user._id }).then((user) => {
         req.session.user['likeCount'] = user.likedRecipes.length
         res.json(req.session.user)
@@ -91,12 +98,16 @@ router.get('/api/user', (req, res) => {
 })
 
 router.post('/api/likeRecipe', (req, res) => {
-  const likedRecipeId = req.body.recipe
+  // who liked the recipe?
   const userId = req.session.user._id
+  // Which recipe did they like
+  const likedRecipeId = req.body.recipe
+  // Update the logged in user, add the liked recipe id to the user's likedRecipes list
   User.updateOne(
     { _id: userId },
     { $addToSet: { likedRecipes: likedRecipeId } }
   )
+    // likedRecipes is a list of  recipe objectIds, populate will replace the liked recipe's objectId with the recipe and its information
     .populate('likedRecipes')
     .then((db) => {
       res.json(db)

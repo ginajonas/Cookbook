@@ -24,3 +24,7 @@ a, a:hover, a:active{
 .daily-recipe-img{
   width:100%;
 }
+
+#navDemo {    
+  margin-top: 52px;
+}

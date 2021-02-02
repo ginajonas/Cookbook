@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 export default function NavBar() {
+  const [navOpen, setNavOpen] = useState(false)
   // We assign a onclick to the logout button to run the logOut function when it is clicked. The logout function will run an api call to /api/logout to destroy the session.
   const logOut = (e) => {
     e.preventDefault()
@@ -10,6 +12,7 @@ export default function NavBar() {
       window.location.href = '#/login'
     })
   }
+
   return (
     <>
       <div className="w3-top">
@@ -17,8 +20,9 @@ export default function NavBar() {
           <Link
             className="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
             to="/"
+            onClick={() => setNavOpen(!navOpen)}
           >
-            <i className="fa fa-cutlery"></i>
+            <i className="fa fa-bars"></i>
           </Link>
           <Link
             to="/"
@@ -60,19 +64,39 @@ export default function NavBar() {
 
       <div
         id="navDemo"
-        className="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large"
+        className={
+          'w3-bar-block w3-theme-d2 w3-large' +
+          (navOpen ? '' : ' w3-hide w3-hide-large w3-hide-medium')
+        }
       >
-        <Link to="/" className="w3-bar-item w3-button w3-padding-large">
-          Link 1
+        <Link
+          to="/"
+          className="w3-bar-item w3-button w3-padding-large"
+          title="Home"
+        >
+          <i className="fa fa-cutlery"></i>
         </Link>
-        <Link to="/" className="w3-bar-item w3-button w3-padding-large">
-          Link 2
+        <Link
+          to="/liked-recipes"
+          className="w3-bar-item w3-button w3-padding-large"
+          title="My Liked Recipes"
+        >
+          <i className="fa fa-heart"></i>
         </Link>
-        <Link to="/" className="w3-bar-item w3-button w3-padding-large">
-          Link 3
+        <Link
+          to="/my-cook-book"
+          className="w3-bar-item w3-button w3-padding-large"
+          title="My Cook Book"
+        >
+          <i className="fa fa-book"></i>
         </Link>
-        <Link to="/" className="w3-bar-item w3-button w3-padding-large">
-          Link 4
+        <Link
+          to="/"
+          onClick={logOut}
+          className="w3-bar-item w3-button w3-padding-large"
+          title="My Account"
+        >
+          Log Out
         </Link>
       </div>
     </>

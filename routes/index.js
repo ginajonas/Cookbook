@@ -3,7 +3,15 @@ const Recipe = require('../models/recipe')
 const User = require('../models/user')
 const axios = require('axios')
 
-router.post('/api/recipe', (req, res) => {
+function loggedIn(req, res, next) {
+  if (req.session.user) {
+    next()
+  } else {
+    res.status(401).json({ message: 'not logged in' })
+  }
+}
+
+router.post('/api/recipe', loggedIn, (req, res) => {
   Recipe.create({ ...req.body, user: req.session.user._id })
     .then((dbRecipe) => {
       res.json(dbRecipe)
@@ -13,7 +21,7 @@ router.post('/api/recipe', (req, res) => {
     })
 })
 
-router.get('/api/recipe', (req, res) => {
+router.get('/api/recipe', loggedIn, (req, res) => {
   Recipe.find({})
     .sort({ createdAt: 'desc' })
     .populate('user')
@@ -25,7 +33,7 @@ router.get('/api/recipe', (req, res) => {
     })
 })
 
-router.delete('/api/recipe/:id', (req, res) => {
+router.delete('/api/recipe/:id', loggedIn, (req, res) => {
   const id = req.params.id
   Recipe.deleteOne({ _id: id, user: req.session.user._id })
     .then((db) => {
@@ -84,14 +92,14 @@ router.post('/api/login', (req, res) => {
   })
 })
 
-router.get('/api/logout', (req, res) => {
+router.get('/api/logout', loggedIn, (req, res) => {
   if (req.session) {
     req.session.destroy()
   }
   res.json({ status: 'success' })
 })
 
-router.get('/api/user', (req, res) => {
+router.get('/api/user', loggedIn, (req, res) => {
   const user = req.session.user
   // if session exists ie. user logged in.
   if (req.session.user) {
@@ -109,7 +117,7 @@ router.get('/api/user', (req, res) => {
   }
 })
 
-router.post('/api/likeRecipe', (req, res) => {
+router.post('/api/likeRecipe', loggedIn, (req, res) => {
   // who liked the recipe?
   const userId = req.session.user._id
   // Which recipe did they like
@@ -129,7 +137,7 @@ router.post('/api/likeRecipe', (req, res) => {
     })
 })
 
-router.get('/api/likeRecipe', (req, res) => {
+router.get('/api/likeRecipe', loggedIn, (req, res) => {
   const userId = req.session.user._id
   User.findOne({ _id: userId })
     .populate({
@@ -144,7 +152,7 @@ router.get('/api/likeRecipe', (req, res) => {
     })
 })
 
-router.get('/api/daily-recipe', (req, res) => {
+router.get('/api/daily-recipe', loggedIn, (req, res) => {
   axios
     .get(
       'https://api.spoonacular.com/recipes/random?apiKey=fca9157baf184d688658c0aa5f74b4bd'
@@ -157,7 +165,7 @@ router.get('/api/daily-recipe', (req, res) => {
     })
 })
 
-router.get('/api/my-recipe', (req, res) => {
+router.get('/api/my-recipe', loggedIn, (req, res) => {
   const userId = req.session.user._id
   Recipe.find({ user: userId })
     .sort({ createdAt: 'desc' })

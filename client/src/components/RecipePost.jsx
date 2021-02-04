@@ -48,7 +48,7 @@ export default function RecipePost({
           (user._id === loggedinUser._id ? '' : 'w3-hide')
         }
       >
-        <i className="fa fa-heart"></i> &nbsp;Delete Recipe
+        <i className="fa fa-trash"></i> &nbsp;Delete Recipe
       </button>
     </div>
   )

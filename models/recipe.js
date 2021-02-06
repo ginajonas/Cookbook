@@ -16,6 +16,9 @@ const recipeSchema = new Schema(
       type: String,
       required: true,
     },
+    hidden: {
+      type: Boolean,
+    },
     // add extra fields
     user: {
       type: Schema.Types.ObjectId,

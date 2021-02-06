@@ -22,7 +22,7 @@ router.post('/api/recipe', loggedIn, (req, res) => {
 })
 
 router.get('/api/recipe', loggedIn, (req, res) => {
-  Recipe.find({})
+  Recipe.find({ $or: [{ hidden: { $exists: false } }, { hidden: false }] })
     .sort({ createdAt: 'desc' })
     .populate('user')
     .then((dbRecipe) => {
